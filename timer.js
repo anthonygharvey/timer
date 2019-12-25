@@ -14,11 +14,11 @@ class Timer {
   }
 
   start = () => {
-    if (this.onStart) this.onStart();
+    if (this.onStart) this.onStart(this.timeRemaining);
     this.tick(); // immediately call the tick function
 
     // set the timer to an instance variable to be accessible to other functions
-    this.interval = setInterval(this.tick, 1000);
+    this.interval = setInterval(this.tick, 20);
   };
 
   pause = () => {
@@ -31,8 +31,8 @@ class Timer {
       if (this.onComplete) this.onComplete();
     } else {
       // setter called 	=  getter called - decrementing
-      this.timeRemaining = this.timeRemaining - 1;
-      if (this.onTick) this.onTick();
+      this.timeRemaining = this.timeRemaining - 0.02;
+      if (this.onTick) this.onTick(this.timeRemaining);
     }
   };
 
@@ -41,6 +41,6 @@ class Timer {
   }
 
   set timeRemaining(time) {
-    this.durationInput.value = time;
+    this.durationInput.value = time.toFixed(2);
   }
 }
